@@ -36,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         userinfoService = new UserinfoServiceImpl(this);
 
         switch (v.getId()){
+
             case R.id.save :
 
                 Userinfo userinfo = new Userinfo();
