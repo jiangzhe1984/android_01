@@ -1,5 +1,6 @@
 package com.example.jiangz.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
               }
               break;
           case R.id.register:
-
+              Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+              startActivity(intent);
               break;
 
           default: break;
