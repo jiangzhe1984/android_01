@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.save :
 
+                
                 Userinfo userinfo = new Userinfo();
                 userinfo.setUsername(username.getText().toString());
                 userinfo.setPassword(password.getText().toString());
