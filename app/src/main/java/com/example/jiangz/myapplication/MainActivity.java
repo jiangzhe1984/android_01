@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.example.jiangz.entity.Userinfo;
 import com.example.jiangz.service.impl.UserinfoServiceImpl;
 
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private UserinfoServiceImpl userinfoService;
