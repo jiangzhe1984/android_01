@@ -1,7 +1,7 @@
 package com.example.jiangz.myapplication;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,7 +12,7 @@ import com.example.jiangz.service.impl.UserinfoServiceImpl;
 /**
  * Created by JiangZ on 2015-08-25.
  */
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends Activity implements View.OnClickListener{
 
     private UserinfoServiceImpl userinfoService;
 

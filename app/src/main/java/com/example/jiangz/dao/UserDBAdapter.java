@@ -234,13 +234,12 @@ public class UserDBAdapter{
            userinfo.setIsEnable(cursor.getInt(3));
            userinfo.setIsLock(cursor.getInt(4));
 
+           if(cursor != null){
+               cursor.close();
+           }
+
            return userinfo;
        }
-
-        if(cursor != null){
-            cursor.close();
-        }
-
         return null;
     }
 
