@@ -54,4 +54,9 @@ public class Userinfo{
     public void setIsLock(Integer isLock) {
         this.isLock = isLock;
     }
+
+    @Override
+    public String toString() {
+        return this.getUsername();
+    }
 }

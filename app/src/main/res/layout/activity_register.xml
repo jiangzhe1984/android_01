@@ -10,29 +10,28 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/register_username"
+        android:id="@+id/zc_username"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp" />
+        android:layout_marginTop="63dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/register_password"
-        android:layout_below="@+id/register_username"
-        android:layout_alignLeft="@+id/register_username"
-        android:layout_alignStart="@+id/register_username"
-        android:layout_marginTop="27dp" />
+        android:id="@+id/zc_password"
+        android:layout_below="@+id/zc_username"
+        android:layout_alignLeft="@+id/zc_username"
+        android:layout_alignStart="@+id/zc_username"
+        android:layout_marginTop="48dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="保存"
-        android:id="@+id/save"
-        android:layout_marginTop="58dp"
-        android:layout_below="@+id/register_password"
-        android:layout_alignLeft="@+id/register_password"
-        android:layout_alignStart="@+id/register_password" />
+        android:id="@+id/zc_save"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/zc_password"
+        android:layout_alignStart="@+id/zc_password" />
 </RelativeLayout>

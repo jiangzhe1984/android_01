@@ -40,21 +40,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
          username = (EditText)findViewById(R.id.username);
          password = (EditText)findViewById(R.id.password);
-        //  Toast.makeText(MainActivity.this, "用户名："+username.getText().toString()+"||密码："+password.getText().toString(), Toast.LENGTH_LONG).show();
         userinfoService = new UserinfoServiceImpl(this);
-
-    /*    if(v.getId() == R.id.submit){
-            Userinfo userinfo = userinfoService.validateUser(username.getText().toString(),password.getText().toString());
-            if(userinfo == null){
-                Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
-            }
-
-        }else if(v.getId() == R.id.register){
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-            startActivity(intent);
-        }*/
 
       switch (v.getId()){
           case R.id.submit:
@@ -63,10 +49,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
                   Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_LONG).show();
               }else{
                   Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
+                  Intent intent = new Intent(MainActivity.this,UserListViewActivity.class);
+                  startActivity(intent);
               }
               break;
           case R.id.register:
-              Intent intent = new Intent(this, RegisterActivity.class);
+              Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
               startActivity(intent);
               break;
 
