@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 用户操作
+ */
 public class UserDBAdapter{
     public static final String KEY_ROWID = "id";
     public static final String KEY_USERNAME = "username";

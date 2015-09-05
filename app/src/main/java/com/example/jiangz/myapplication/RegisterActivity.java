@@ -3,6 +3,7 @@ package com.example.jiangz.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.jiangz.entity.Userinfo;
 import com.example.jiangz.service.impl.UserinfoServiceImpl;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by JiangZ on 2015-08-25.
@@ -52,6 +55,10 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 long result = userinfoService.createUser(userinfo);
 
                 if(result > 0l){
+                    if(!TextUtils.isEmpty(username.getText()) && !TextUtils.isEmpty(password.getText())){
+                        username.setText("");
+                        password.setText("");
+                    }
                     Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(RegisterActivity.this, UserListViewActivity.class);
                     startActivity(intent);

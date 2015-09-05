@@ -3,6 +3,7 @@ package com.example.jiangz.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +49,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
               if(userinfo == null){
                   Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_LONG).show();
               }else{
+                  if(!TextUtils.isEmpty(username.getText()) && !TextUtils.isEmpty(password.getText())){
+                      username.setText("");
+                      password.setText("");
+                      username.setCursorVisible(false);
+                      password.setCursorVisible(false);
+                  }
                   Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
                   Intent intent = new Intent(MainActivity.this,UserListViewActivity.class);
                   startActivity(intent);
