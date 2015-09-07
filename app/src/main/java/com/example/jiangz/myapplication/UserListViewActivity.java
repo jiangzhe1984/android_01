@@ -9,32 +9,53 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.jiangz.adapters.UserinfoAdapter;
 import com.example.jiangz.entity.Userinfo;
 import com.example.jiangz.service.impl.UserinfoServiceImpl;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemClick;
+import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
 /**
  * Created by JiangZ on 2015-08-29.
  */
+@EActivity(R.layout.activity_userlist)
 public class UserListViewActivity extends Activity{
 
-    private ListView user_listView;
+    @ViewById(R.id.user_listView)
+     ListView user_listView;
 
-    private UserinfoServiceImpl userinfoService;
+    @Bean
+     UserinfoServiceImpl userinfoService;
+
+    @AfterViews
+    public void init(){
+        List<Userinfo> userinfos = userinfoService.fetchAllUsers();
+        String flags[] = {"username"};
+        int itemIDs[] = {R.id.view_username};
+       UserinfoAdapter userinfoAdapter = new UserinfoAdapter(this,userinfos,R.layout.layout_userinfo,flags,itemIDs);
+        user_listView.setAdapter(userinfoAdapter);
+
+    }
+
+    @ItemClick(R.id.user_listView)
+    public void listItemClick(int position){
+        Userinfo userinfo =  (Userinfo)user_listView.getItemAtPosition(position);
+        Toast.makeText(UserListViewActivity.this, userinfo.getId()+"||"+userinfo.getUsername(), Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userlist);
 
-        userinfoService = new UserinfoServiceImpl(this);
 
-        List<Userinfo> userinfos = userinfoService.fetchAllUsers();
 
-        user_listView = (ListView)findViewById(R.id.user_listView);
-
-        user_listView.setAdapter(new ArrayAdapter<Userinfo>(this,
+      /*  user_listView.setAdapter(new ArrayAdapter<Userinfo>(this,
                 android.R.layout.simple_list_item_1, userinfos));
 
         user_listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -45,7 +66,7 @@ public class UserListViewActivity extends Activity{
                 //Log.w("UserListViewActivity",String.valueOf(position));
                 Toast.makeText(UserListViewActivity.this, userinfo.getId()+"||"+userinfo.getUsername(), Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
     }
 }

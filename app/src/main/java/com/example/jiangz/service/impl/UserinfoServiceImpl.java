@@ -6,12 +6,15 @@ import com.example.jiangz.dao.UserDBAdapter;
 import com.example.jiangz.entity.Userinfo;
 import com.example.jiangz.service.UserinfoService;
 
+import org.androidannotations.annotations.EBean;
+
 import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Created by JiangZ on 2015-08-25.
  */
+@EBean
 public class UserinfoServiceImpl implements UserinfoService {
 
     private UserDBAdapter userDBAdapter ;

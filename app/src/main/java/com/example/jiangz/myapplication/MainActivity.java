@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,62 +14,61 @@ import android.widget.Toast;
 import com.example.jiangz.entity.Userinfo;
 import com.example.jiangz.service.impl.UserinfoServiceImpl;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
-    private UserinfoServiceImpl userinfoService;
+@EActivity(R.layout.activity_main)
+public class MainActivity extends Activity {
 
-    private EditText username;
+    @Bean
+    UserinfoServiceImpl userinfoService;
 
-    private  EditText password;
+    @ViewById(R.id.username)
+     EditText username;
 
-    private Button submit;
-
-    private Button register;
+    @ViewById(R.id.password)
+     EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        submit = (Button) findViewById(R.id.submit);
-        register = (Button) findViewById(R.id.register);
-        submit.setOnClickListener(this);
-        register.setOnClickListener(this);
     }
 
 
+  /*  @AfterViews
+    void init(){
+        username.setText("bb");
+        password.setText("bb");
+   }*/
 
-    @Override
-    public void onClick(View v) {
-         username = (EditText)findViewById(R.id.username);
-         password = (EditText)findViewById(R.id.password);
-        userinfoService = new UserinfoServiceImpl(this);
 
-      switch (v.getId()){
-          case R.id.submit:
-              Userinfo userinfo = userinfoService.validateUser(username.getText().toString(),password.getText().toString());
-              if(userinfo == null){
-                  Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_LONG).show();
-              }else{
-                  if(!TextUtils.isEmpty(username.getText()) && !TextUtils.isEmpty(password.getText())){
-                      username.setText("");
-                      password.setText("");
-                      username.setCursorVisible(false);
-                      password.setCursorVisible(false);
-                  }
-                  Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
-                  Intent intent = new Intent(MainActivity.this,UserListViewActivity.class);
-                  startActivity(intent);
-              }
-              break;
-          case R.id.register:
-              Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-              startActivity(intent);
-              break;
-
-          default: break;
-      }
-
+    @Click
+    void submit(){
+        Userinfo userinfo = userinfoService.validateUser(username.getText().toString(),password.getText().toString());
+        if(userinfo == null){
+            Toast.makeText(MainActivity.this, "用户名或密码错误", Toast.LENGTH_LONG).show();
+        }else{
+            if(!TextUtils.isEmpty(username.getText()) && !TextUtils.isEmpty(password.getText())){
+                username.setText("");
+                password.setText("");
+                username.setCursorVisible(false);
+                password.setCursorVisible(false);
+            }
+            Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this,UserListViewActivity_.class);
+            startActivity(intent);
+        }
     }
+
+    @Click
+    void register(){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
