@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.example.jiangz.entity.Account;
+import com.example.jiangz.utils.Kalendar;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class AccountDBAdapter {
     public static final String KEY_CATEGORY = "category";
     public static final String KEY_REMARKS = "remarks";
     public static final String KEY_ACCOUNTTIME = "accountTime";
+    public static final String KEY_CURRENTMONTH = "currentMonth";
 
 
     private static final String TAG = "AccountDBAdapter";
@@ -47,6 +50,7 @@ public class AccountDBAdapter {
                     KEY_CATEGORYID + "," +
                     KEY_CATEGORY + "," +
                     KEY_REMARKS + "," +
+                    KEY_CURRENTMONTH + "," +
                     KEY_ACCOUNTTIME + ");";
 
 
@@ -106,6 +110,7 @@ public class AccountDBAdapter {
         initialValues.put(KEY_CATEGORY,account.getCategory());
         initialValues.put(KEY_REMARKS,account.getRemarks());
         initialValues.put(KEY_ACCOUNTTIME,new SimpleDateFormat("yyyy-MM-dd").format(account.getAccountTime()));
+        initialValues.put(KEY_CURRENTMONTH, Kalendar.getCurrentMonth());
 
         return mDb.insert(SQLITE_TABLE, null, initialValues);
     }
@@ -140,7 +145,7 @@ public class AccountDBAdapter {
 
         List<Account> accounts = new ArrayList<>();
 
-        String whereClause = null;
+        String whereClause = " 1=1 ";
         String[] whereArgs = null;
 
         if(!map.isEmpty()){
@@ -153,6 +158,8 @@ public class AccountDBAdapter {
                      }
                      if(String.valueOf(entry.getKey()).equals(KEY_ROWID)){
                          whereClause += String.valueOf(entry.getKey()) +" = ? ";
+                     }else if(String.valueOf(entry.getKey()).equals(KEY_CURRENTMONTH)){
+                         whereClause += String.valueOf(entry.getKey()) +" = ? ";
                      }else{
                          whereClause += String.valueOf(entry.getKey()) +" like ? ";
                      }
@@ -164,7 +171,7 @@ public class AccountDBAdapter {
         }
 
         Cursor mCursor = mDb.query(true, SQLITE_TABLE, new String[] {KEY_ROWID,
-                        KEY_PRICE, KEY_CATEGORYID, KEY_CATEGORY, KEY_REMARKS, KEY_ACCOUNTTIME},
+                        KEY_PRICE, KEY_CATEGORYID, KEY_CATEGORY, KEY_REMARKS, KEY_ACCOUNTTIME, KEY_CURRENTMONTH},
                 whereClause, whereArgs,null, null, null, null);
 
         if (mCursor.moveToFirst()) {
@@ -180,6 +187,7 @@ public class AccountDBAdapter {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                account.setCurrentMonth(mCursor.getString(6));
                 accounts.add(account);
             }while(mCursor.moveToNext());
         }

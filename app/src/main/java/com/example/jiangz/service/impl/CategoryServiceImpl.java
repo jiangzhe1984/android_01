@@ -4,12 +4,16 @@ import android.content.Context;
 import com.example.jiangz.dao.CategoryDBAdapter;
 import com.example.jiangz.entity.Category;
 import com.example.jiangz.service.CategoryService;
+
+import org.androidannotations.annotations.EBean;
+
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by JiangZ on 2015-09-05.
  */
+@EBean
 public class CategoryServiceImpl implements CategoryService {
 
     private CategoryDBAdapter categoryDBAdapter;

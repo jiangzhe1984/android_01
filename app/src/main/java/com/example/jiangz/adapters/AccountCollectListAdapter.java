@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.jiangz.entity.Userinfo;
+
+import com.example.jiangz.entity.AccountCollectByMonth;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * Created by JiangZ on 2015-09-07.
+ * Created by JiangZ on 2015-09-19.
  */
-public class UserinfoAdapter extends BaseAdapter {
+public class AccountCollectListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
 
@@ -26,11 +27,11 @@ public class UserinfoAdapter extends BaseAdapter {
 
     private int itemIDs[];
 
-    private List<Userinfo> userinfoList;
+    private List<AccountCollectByMonth> accountCollectByMonthList;
 
-    public UserinfoAdapter(Context context,List<Userinfo> userinfoList,int layoutID, String flag[], int itemIDs[]){
+    public AccountCollectListAdapter(Context context, List<AccountCollectByMonth> accountCollectByMonthList, int layoutID, String flag[], int itemIDs[]){
         this.mInflater = LayoutInflater.from(context);
-        this.userinfoList = userinfoList;
+        this.accountCollectByMonthList = accountCollectByMonthList;
         this.layoutID = layoutID;
         this.flag = flag;
         this.itemIDs = itemIDs;
@@ -38,17 +39,7 @@ public class UserinfoAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return userinfoList.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return userinfoList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+        return accountCollectByMonthList.size();
     }
 
     @Override
@@ -62,14 +53,20 @@ public class UserinfoAdapter extends BaseAdapter {
                         flag[i]));*/
             } else if (convertView.findViewById(itemIDs[i]) instanceof TextView) {
                 TextView tv = (TextView) convertView.findViewById(itemIDs[i]);
-                Userinfo userinfo = userinfoList.get(position);
-                try {
-                    Method method = Userinfo.class.getMethod("get" + flag[i].substring(0, 1).toUpperCase() + flag[i].substring(1), null);
-                    String value = (String)method.invoke(userinfo);
-                    tv.setText(value);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if(!accountCollectByMonthList.isEmpty()){
+                    AccountCollectByMonth accountCollectByMonth = accountCollectByMonthList.get(position);
+                    try {
+                        Method method = AccountCollectByMonth.class.getMethod("get" + flag[i].substring(0, 1).toUpperCase() + flag[i].substring(1), null);
+                        String value = (String)method.invoke(accountCollectByMonth);
+                        tv.setText(value);
+                        Log.d("value", value);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    tv.setText("");
                 }
+
 
             }else{
                 //...备注2
@@ -79,9 +76,13 @@ public class UserinfoAdapter extends BaseAdapter {
         return convertView;
     }
 
-
-    public static void main(String[] args){
-        System.err.println("get"+"username".substring(0, 1).toUpperCase()+"username".substring(1));
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
+    @Override
+    public Object getItem(int position) {
+        return !accountCollectByMonthList.isEmpty()?accountCollectByMonthList.get(position):null;
+    }
 }

@@ -4,12 +4,16 @@ import android.content.Context;
 import com.example.jiangz.dao.AccountDBAdapter;
 import com.example.jiangz.entity.Account;
 import com.example.jiangz.service.AccountService;
+
+import org.androidannotations.annotations.EBean;
+
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by JiangZ on 2015-09-05.
  */
+@EBean
 public class AccountServiceImpl implements AccountService {
 
     private AccountDBAdapter accountDBAdapter;

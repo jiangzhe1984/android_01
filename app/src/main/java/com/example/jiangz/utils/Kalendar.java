@@ -31,6 +31,10 @@ public class Kalendar {
 		return pareDate;
 	}
 
+	public static String getCurrentMonth(){
+		return new SimpleDateFormat("MM").format(new Date());
+	}
+
 
 	public static String getFormat(Date date){
 		return new SimpleDateFormat("yyyy-MM-dd").format(date);

@@ -21,6 +21,16 @@ public class Account {
 
     private Date accountTime;
 
+    private String currentMonth;
+
+    public String getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public void setCurrentMonth(String currentMonth) {
+        this.currentMonth = currentMonth;
+    }
+
     public Integer getId() {
         return id;
     }

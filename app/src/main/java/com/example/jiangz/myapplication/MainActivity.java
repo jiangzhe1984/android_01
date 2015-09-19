@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
                 password.setCursorVisible(false);
             }
             Toast.makeText(MainActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this,UserListViewActivity_.class);
+            Intent intent = new Intent(this,AccountListViewActivity_.class);
             startActivity(intent);
         }
     }

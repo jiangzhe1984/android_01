@@ -60,7 +60,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                         password.setText("");
                     }
                     Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(RegisterActivity.this, UserListViewActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, UserListViewActivity_.class);
                     startActivity(intent);
                 }
 
